@@ -17,26 +17,27 @@ Ns = 12;
 pp = 2;
 p = pp*2;
 
-l = 0.100;
-ag = 0.001;
+laxial = 0.100;
+lg = 0.001;
 
-rr_i = 0.100/2;
-t_m = 0.004;
+Rrotor_inner = 0.100/2;
+lm = 0.004;
 
 J = 5*1e6;
 Kp = 0.6;
 
 %% Analysis
 
-sr_i = rr_i+ag;
-b_i = 1.5*((sr_i*2*pi)/(Ns*2));
+Rstator_inner = Rrotor_inner+lg;
+backiron = 1.5*((2*pi*Rstator_inner)/(Ns*2));
 
-sr_o = sr_i * 1.88;
-h_s = (sr_o-sr_i)-b_i;
+Rslot_outer = Rstator_inner * 1.88;
+Rstator_outer = Rslot_outer + backiron;
+hslot = (Rslot_outer-Rstator_inner);
 
-a_s = h_s*((sr_i*2*pi)/(Ns*2));
+a_s = hslot*((Rstator_inner*2*pi)/(Ns*2));
 
-A = (Ns*Kp*a_s*J)/(2*pi*sr_i);
+A = (Ns*Kp*a_s*J)/(2*pi*Rstator_inner);
 
 
 %% Number of turns

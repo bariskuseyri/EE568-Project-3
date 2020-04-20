@@ -1,0 +1,23 @@
+Circuit: * C:\Users\bkuseyri\Desktop\METU\EE568\EE568-Project-3\Draft1.asc
+
+ERROR: Node N004 is floating and connected to current source I4
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Mon Apr 20 19:00:35 2020
+Total elapsed time: 0.240 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2095
+traniter = 2092
+tranpoints = 1047
+accept = 1047
+rejected = 0
+matrix size = 8
+fillins = 0
+solver = Normal
+Matrix Compiler1:      19 opcodes  0.1/[0.1]/0.1
+Matrix Compiler2: off  [0.1]/0.1/0.1
+

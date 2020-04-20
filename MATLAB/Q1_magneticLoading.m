@@ -19,18 +19,18 @@ u_0 = 4 * pi * 1e-7;
 u_r = 1.05;
 H_c = 1030272;
 
-l_g = 0.001;
-l_m = 0.004;
+lg = 0.001;
+lm = 0.004;
 
 %% Peak Airgap Flux Density
 
 
-B_r = H_c * u_0 * u_r;
-B_g = B_r / (1 + u_r * (l_g / l_m));
+Brem = H_c * u_0 * u_r;
+Bg_peak = Brem / (1 + u_r * (lg / lm));
 
 
 %% Magnetic Loading
 
-B = (2/pi) * B_g;
+B = (2/pi) * Bg_peak;
 
 
