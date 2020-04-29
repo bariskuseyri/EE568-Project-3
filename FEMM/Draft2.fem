@@ -3,8 +3,8 @@
 [Precision]   =  1e-008
 [MinAngle]    =  30
 [DoSmartMesh] =  1
-[Depth]       =  1
-[LengthUnits] =  millimeters
+[Depth]       =  0.10000000000000001
+[LengthUnits] =  meters
 [ProblemType] =  planar
 [Coordinates] =  cartesian
 [ACSolver]    =  0

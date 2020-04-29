@@ -6,6 +6,8 @@ newdocument(0)			-- 0: magnetic problem
 -- ERROR: mi_addarc arc segment degree is given in radians | should be in degrees
 -- Display
 
+mi_probdef(0, 'meters', 'planar', 1e-008, 0.100, 30, 0)	
+
 stator = 1
 rotor = 1
 shaft = 1

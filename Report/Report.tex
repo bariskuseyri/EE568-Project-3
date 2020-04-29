@@ -1,9 +1,12 @@
 \documentclass[a4paper, 11pt, titlepage]{article}
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usepackage{nath}
+%\usepackage{nath}
 \usepackage{gensymb}
 \usepackage{indentfirst}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
 
 \begin{document}
 \title{EE568 Project 3: PM Motor Comparison Analysis}
@@ -16,6 +19,28 @@
 
 
 \section{Q1- Magnetic Loading}
+
+\begin{figure}[h!]
+	\begin{center}
+		\begin{circuitikz}
+			\draw (0,0)
+			to[short] (0,0.5)
+			to[battery,l^=$F$, invert] (0,2)
+			to[R=$R_m$] (0,3.5)
+			to[short] (0,4)
+			to[short,i_=$\phi$] (1,4)
+			to[R=$R_g$] (3,4)
+			to[short] (4,4)
+			to[short] (4,3.5)
+			to[battery,l^=$F$, invert] (4,2)
+			to[R=$R_m$] (4,0.5)
+			to[short] (4,0)
+			to[R=$R_g$] (0,0);
+		\end{circuitikz}
+	\caption{magnetic equivalent circuit for one pole-pair}
+	\label{fig:magneticCircuit}
+	\end{center}
+\end{figure}
 
 \begin{tabular}{|c|c|c|}
 	number of phases & $m$ & 3 \\
