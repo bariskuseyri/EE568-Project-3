@@ -2,7 +2,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 %\usepackage{nath}
-\usepackage{gensymb}
+%\usepackage{gensymb}
 \usepackage{indentfirst}
 
 \usepackage{tikz}
@@ -16,6 +16,29 @@
 
 \pagenumbering{arabic}
 \tableofcontents
+\newpage
+
+\section{Introduction}
+
+\begin{table}[ht]
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			 & symbol & unit & value \\
+			\hline
+			number of phases & $m$ & & 3 \\
+			number of poles & $p$ & & 4 \\
+			motor axial length & $l_m$ & mm & 100 \\ 
+			air-gap clearance & $\delta_g$ & mm & 1 \\
+			magnet to pole pitch ratio & & & 0.8 \\
+			rotor diameter & $D_r$ & mm & 100 \\
+			magnet radial thickness & $t_m$ & mm & 4 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Machine Parameters}
+	\label{table:machineParameters}
+\end{table}
+	
 
 
 \section{Q1- Magnetic Loading}
@@ -42,26 +65,67 @@
 	\end{center}
 \end{figure}
 
-\begin{tabular}{|c|c|c|}
-	number of phases & $m$ & 3 \\
-	number of poles & $p$ & 4 \\
-	motor axial length [mm] & $l$ & 100 \\ 
-	air-gap clearance [mm] & $\delta_g$ & 1 \\
-	magnet to pole pitch ratio & & 0.8 \\
-	
-	
-	magnet type & & NdFeB N42 grade ($\mu_r$=1.05), radial shaped \\
-	rotor diameter [mm] & $D_r$ & 100 \\
-	magnet radial thickness [mm] & $t_m$ & 4 \\
-	
-\end{tabular}
+\begin{table}[ht]
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			 & symbol & units & value \\
+			\hline
+			magnet type & & & NdFeB N42 \\
+			shape & & & radial \\ 
+			relative permeability & $\mu_r$ & & 1.05 \\
+			coercivity & $H_c$ & $A/m$ & 994529 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Permanent Magnet Parameters}
+	\label{fig:PMParameters}
+\end{table}
 
+
+
+\begin{equation}
+	B_r = \mu_0\mu_r\times H_c 
+	\label{label:remanenceFluxDensity}
+\end{equation}
+
+\begin{eqnarray}
+	B_mA_m & = & B_gA_g \\
+	H_ml_m & = & -H_gl_g \\
+	B_g &=& \mu_oH_g \\
+	B_mA_m &=& \mu_0H_gA_g=-\mu_0H_mA_g\frac{l_m}{l_g} \\
+	\frac{B_m}{H_m} &=& -\frac{\mu_0A_g}{A_m}\frac{l_m}{l_g}
+	\label{label:loadLine}
+\end{eqnarray}
+
+This is the equation of the so-called load-line of the magnetic circuit. 
+
+For a material with a linear demagnetisation characteristic:
+
+\begin{eqnarray}
+	B_m = B_r + \mu_0\mu_rH_m \\
+	H_m = \frac{B_m-B_r}{\mu_0\mu_r} \\
+	B_m=-\frac{A_gl_m}{A_ml_g\mu_r}(B_m-B_r) \\
+	B_m(\frac{A_gl_m}{A_ml_g\mu_r}+1)=\frac{A_gl_m}{A_ml_g\mu_r}B_r \\
+	B_m = \frac{\frac{A_gl_m}{A_ml_g\mu_r}}{\frac{A_gl_m}{A_ml_g\mu_r}+1}B_r \\
+	B_m = \frac{B_r}{a+\frac{A_ml_g\mu_r}{A_gl_m}}
+	\label{label:demagnetizationCharacteristics}
+\end{eqnarray}
+
+\begin{equation}
+	B_{avg} = \frac{1}{\sqrt{2}}\hat{B_g}
+\end{equation}
+
+\begin{figure}[b]{1.00\textwidth}
+	%\includegraphics[width=\textwidth]{flux_density.bmp}
+	\caption{}
+	\label{subfig:Q1_dist_factor}
+\end{figure}
 
 \subsection{a}
 
-\subsection{b}
+\subsection{b Magnetic Loading}
 
-\subsection{c}
+\subsection{c FEA Results}
 
 
 \section{Q2- Electrical Loading \& Machine Sizing}

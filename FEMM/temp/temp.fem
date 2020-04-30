@@ -75,10 +75,10 @@
       2.3410000000000002	62037
   <EndBlock>
   <BeginBlock>
-    <BlockName> = "N45"
+    <BlockName> = "N42"
     <Mu_x> = 1.05
     <Mu_y> = 1.05
-    <H_c> = 1030272
+    <H_c> = 994529
     <H_cAngle> = 0
     <J_re> = 0
     <J_im> = 0

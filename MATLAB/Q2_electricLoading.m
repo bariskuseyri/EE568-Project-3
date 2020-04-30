@@ -11,7 +11,7 @@ close all
 
 %% Machine Parameters
 
-Bg_peak = 1.076761883158567;
+Bg_peak = 1.039406019862528;
 
 m = 3;      % number of phase
 Ns = 12;    % number of slots

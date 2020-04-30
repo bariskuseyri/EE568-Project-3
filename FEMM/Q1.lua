@@ -42,7 +42,7 @@ fill_factor = 0.60
 
 mi_getmaterial('Air')
 mi_getmaterial('Hiperco-50')
-mi_getmaterial('N45')
+mi_getmaterial('N42')
 mi_getmaterial('M-15 Steel')
 
 
@@ -129,7 +129,7 @@ for n = 0, (2*pi-1) do
 	mi_addblocklabel((rotor_radius_outer-(radial_magnet_length/2))*cos(n*(2*pi)/(p)+(pi/p)),(rotor_radius_outer-(radial_magnet_length/2))*sin(n*(2*pi)/(p)+(pi/p)))
 
 	mi_selectlabel((rotor_radius_outer-(radial_magnet_length/2))*cos(((2*n+1)/2)*(2*pi)/(p)),(rotor_radius_outer-(radial_magnet_length/2))*sin(((2*n+1)/2)*(2*pi)/(p)))
-	mi_setblockprop('N45', 1, 0, 0, 45+90*n + n*180, 0, 0)
+	mi_setblockprop('N42', 1, 0, 0, 45+90*n + n*180, 0, 0)
 	mi_selectlabel((rotor_radius_outer-(radial_magnet_length/2))*cos(((2*n+1)/2)*(2*pi)/(p)),(rotor_radius_outer-(radial_magnet_length/2))*sin(((2*n+1)/2)*(2*pi)/(p)))
 	
 end
@@ -151,6 +151,15 @@ mi_saveas("temp/temp.fem")	-- save temporary
 mi_analyse()
 mi_loadsolution()
 
+mo_maximize()
+mo_hidepoints()
+mo_smooth('on')
+mo_zoomnatural()
+
+mo_showdensityplot(1,0,1.4,0,'mag')
+mo_showvectorplot(5,1)
+mo_savebitmap("../Report/flux_density.bmp")
+
 mo_seteditmode("contour")
 
 mo_selectpoint(stator_radius_inner-(airgap/2),0)
@@ -158,7 +167,7 @@ mo_selectpoint((-1)*(stator_radius_inner-(airgap/2)),0)
 
 
 
-mo_makeplot(1, 1500, "airgap_flux_density.emf", 0)
+mo_makeplot(1, 1500, "../MATLAB/airgap_flux_density.txt", 1)
 mo_savebitmap("airgap_flux_density.bmp")
 
 --mo_close()
