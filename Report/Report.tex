@@ -8,6 +8,9 @@
 \usepackage{tikz}
 \usepackage{circuitikz}
 
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+
 \begin{document}
 \title{EE568 Project 3: PM Motor Comparison Analysis}
 \author{Baris Kuseyri}
@@ -43,27 +46,7 @@
 
 \section{Q1- Magnetic Loading}
 
-\begin{figure}[h!]
-	\begin{center}
-		\begin{circuitikz}
-			\draw (0,0)
-			to[short] (0,0.5)
-			to[battery,l^=$F$, invert] (0,2)
-			to[R=$R_m$] (0,3.5)
-			to[short] (0,4)
-			to[short,i_=$\phi$] (1,4)
-			to[R=$R_g$] (3,4)
-			to[short] (4,4)
-			to[short] (4,3.5)
-			to[battery,l^=$F$, invert] (4,2)
-			to[R=$R_m$] (4,0.5)
-			to[short] (4,0)
-			to[R=$R_g$] (0,0);
-		\end{circuitikz}
-	\caption{magnetic equivalent circuit for one pole-pair}
-	\label{fig:magneticCircuit}
-	\end{center}
-\end{figure}
+
 
 \begin{table}[ht]
 	\begin{center}
@@ -83,14 +66,73 @@
 
 
 
+
+
+
+\subsection{a. Magnetic Equivalent Circuit, Magnet Load Line and Peak Air-gap Flux Density}
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\begin{circuitikz}
+			\draw (0,0)
+			to[short] (0,0.5)
+			to[battery,l^=$F$, invert] (0,1)
+			to[R=$R_m$,i_=$\phi$] (0,3)
+			to[short] (0,4)
+			to[short,i_=$\frac{\phi}{2}$] (1,4)
+			to[R=$R_g$] (3,4)
+			to[short] (4,4)
+			to[short] (4,3.5)
+			to[battery,l^=$F$, invert] (4,3)
+			to[R=$R_m$,i_=$\phi$] (4,1)
+			to[short] (4,0)
+			to[R=$R_g$] (0,0);
+		\end{circuitikz}
+	\caption{magnetic equivalent circuit for one pole-pair}
+	\label{fig:magneticCircuit}
+	\end{center}
+\end{figure}
+
+
+\subsection{b. Magnetic Loading}
+
+Magnetic loading of a machine refers to the average airgao flux density over a pole. This value can be calculated by
+
+\begin{equation}
+	\bar{B}=\frac{p\phi_p}{\pi D_rl}
+	\label{eq:specificMagneticLoading}
+\end{equation}
+
+where $\bar{B}$ is specific magnetic loading, $p$ is the number of poles, $\phi_p$ is flux per pole, $D_r$ is rotor diameter, and $l$ is the axial length of the machine. Equation \ref{eq:specificMagneticLoading} interprets specific magnetic loading $\bar{B}$ as total flux going out of the rotor surface divided by total rotor surface area.
+
+To find out $\phi_p$, machine's magnetic circuit is needed to be analyzed. The magnetic circuit diagram can be seen in Fig. \ref{fig:magneticCircuit}. 
+
+The magnetic circuit is composed of 2 NdFeB 42 permanent magnets (PM) and 2 instances of airgaps. To analyse this circuit, PM remanence flux density $B_r$ information is required. At this point, relative permeability $\mu_r$ and coercivity $H_c$ of NdFeB 42 PM is given as a part of the problem, which can be seen in Table \ref{fig:PMParameters}. From here; remanence flux density can be found by the following relation:
+
 \begin{equation}
 	B_r = \mu_0\mu_r\times H_c 
 	\label{label:remanenceFluxDensity}
 \end{equation}
 
+where, $\mu_0$ is the permeability of air or vacuum ($\mu_0=4\pi \times 10^{-7}A/m$). Hence, magnet remanence flux density  is $B_r=1.31 T$. Now,
+
+Neglecting leakage flux:
+
+\begin{equation}
+	B_mA_m = B_gA_g
+\end{equation}
+
+Assuming infinitely permeable core ($\mu_c=\infty$, where $\mu_c$ is the core permeability)
+
 \begin{eqnarray}
-	B_mA_m & = & B_gA_g \\
-	H_ml_m & = & -H_gl_g \\
+	H_ml_m + H_gl_g &=& 0 \\
+	H_ml_m &=& -H_gl_g
+\end{eqnarray}
+
+Now, in the airgap
+
+\begin{eqnarray}
 	B_g &=& \mu_oH_g \\
 	B_mA_m &=& \mu_0H_gA_g=-\mu_0H_mA_g\frac{l_m}{l_g} \\
 	\frac{B_m}{H_m} &=& -\frac{\mu_0A_g}{A_m}\frac{l_m}{l_g}
@@ -102,46 +144,165 @@ This is the equation of the so-called load-line of the magnetic circuit.
 For a material with a linear demagnetisation characteristic:
 
 \begin{eqnarray}
-	B_m = B_r + \mu_0\mu_rH_m \\
-	H_m = \frac{B_m-B_r}{\mu_0\mu_r} \\
-	B_m=-\frac{A_gl_m}{A_ml_g\mu_r}(B_m-B_r) \\
-	B_m(\frac{A_gl_m}{A_ml_g\mu_r}+1)=\frac{A_gl_m}{A_ml_g\mu_r}B_r \\
-	B_m = \frac{\frac{A_gl_m}{A_ml_g\mu_r}}{\frac{A_gl_m}{A_ml_g\mu_r}+1}B_r \\
-	B_m = \frac{B_r}{a+\frac{A_ml_g\mu_r}{A_gl_m}}
+	B_m &=& B_r + \mu_0\mu_rH_m \\
+	H_m &=& \frac{B_m-B_r}{\mu_0\mu_r} \\
+	B_m &=& -\frac{A_gl_m}{A_ml_g\mu_r}(B_m-B_r) \\
+	B_m(\frac{A_gl_m}{A_ml_g\mu_r}+1) &=& \frac{A_gl_m}{A_ml_g\mu_r}B_r \\
+	B_m &=& \frac{\frac{A_gl_m}{A_ml_g\mu_r}}{\frac{A_gl_m}{A_ml_g\mu_r}+1}B_r \\
+	B_m &=& \frac{B_r}{1+\frac{A_ml_g\mu_r}{A_gl_m}}
 	\label{label:demagnetizationCharacteristics}
 \end{eqnarray}
 
+Assuming $A_g = A_m$, the above equation simplifies to
+
 \begin{equation}
-	B_{avg} = \frac{1}{\sqrt{2}}\hat{B_g}
+	B_g = B_m = \frac{B_r}{1+\mu_r\frac{l_g}{l_m}}
 \end{equation}
 
-\begin{figure}[b]{1.00\textwidth}
-	%\includegraphics[width=\textwidth]{flux_density.bmp}
-	\caption{}
-	\label{subfig:Q1_dist_factor}
+where $B_g$ is the airgap flux density, $l_g$ is the airgap clearance and $l_m$ is the magnet thickness. Here, $B_g$ value corresponds to the peak airgap flux density $\hat{B}_g$. The average airgap flux density corresponds to the $RMS$ value of peak airgap flux density
+
+\begin{equation}
+	B_{avg} = \frac{1}{\sqrt{2}}\hat{B}_g
+	\label{label:}
+\end{equation}
+
+which corresponds to specific magnetic loading $\bar{B}$ of the machine.
+
+
+\subsection{c. FEA Results}
+
+FEMM is used as FEA software.
+
+\begin{figure}[t]
+	\includegraphics[width=\textwidth]{fluxDensity.png}
+	\caption{Flux Density Plot}
+	\label{fig:Bplot}
 \end{figure}
 
-\subsection{a}
-
-\subsection{b Magnetic Loading}
-
-\subsection{c FEA Results}
+\begin{figure}[t]
+	\includegraphics[width=\textwidth]{airgapFluxDensity.png}
+	\caption{Airgap Flux Density Distribution}
+	\label{fig:airgapBplot}
+\end{figure}
 
 
 \section{Q2- Electrical Loading \& Machine Sizing}
 
 
-\subsection{a}
+\subsection{a. Number of Slots}
 
-\subsection{b}
+Number of slots for this machine is determined to be 12.
 
-\subsection{c}
 
-\subsection{d}
+\subsection{b. AWG Cable}
 
-\subsection{e}
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			 & symbol & units & value \\
+			\hline
+			max. current density & $J$ & $A/mm^2$ & 5 \\
+			coil current & $I$ & A & 2.5 \\ 
+			fill factor & $K_p$ & & 0.6 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Permanent Magnet Parameters}
+	\label{fig:PMParameters}
+\end{table}
 
-\subsection{f}
+
+If the maximum current density $\hat{J}$ is set to be $5 A/mm^2$ and one conductor is carrying $2.5A$, then the maximum number of conductors there can be in $1mm^2$ is 2, and the total cross-section area of 2 conductors can not be below $1mm^2$. Therefore, the suitable AWG cable chosen for this project is AWG 20. The characteristics of AWG20 cable can be seen in Table \ref{tab:AWG20}, below.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			AWG & diameter [$mm$] & area [$mm^2$] & resistance/length [m$\Omega$/m] \\
+			\hline
+			20 &  0.812 & 0.518 & 33.31 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{AWG 20 characteristics}
+	\label{tab:AWG20}
+\end{table}
+
+
+As can be seen in Table \ref{tab:AWG20}, the cross-section area of AWG 20 cable is $0.518mm^2$, which corresponds to $J=4.83A/mm^2$, below the maximum current density value given for this project. Using any cable with a cross-section area below $0.500mm^2$ with a coil current of $I=2.5A$ would exceed this current density $J$ limitation.
+
+
+\subsection{c. Slot Height, Number of Coils per Slot, and Back-core Thickness}
+
+This part starts by choosing a slot ratio $d$ for the machine. This choice is done in the following fashion. Teeth shape is determined to be rectangular. Then, the slot area is calculated by
+
+
+
+where $A_s$ is slot area, $N_s$ is the number of slots, $r_{so}$ is the slot outer radius, $r_{si}$ is the slot inner or stator inner radius, and $A_t$ is the area of tooth.
+
+First, tooth to slot opening ratio is assumed to be 1 to 1. Then, 
+
+\begin{equation}
+	\tau_{teeth} = \tau_{slot} = \frac{2\pi r_{si}}{2N_s}
+\end{equation}
+
+where $\tau_{teeth}$ is the tooth thickness and $\tau_{slot}$ is the slot opening. 
+
+\begin{equation}
+	h_t = \frac{r_{si}}{d}-r_{si}
+\end{equation}
+
+where $h_t$ is tooth height. Then, tooth area is calculated by
+
+\begin{equation}
+	A_t = h_t \tau_{teeth}
+\end{equation}
+
+\begin{equation}
+	N_sA_s = (\pi r_{so}^2 - \pi r_{si}^2)-N_sA_t
+\end{equation}
+
+Hence, the slot area $A_s$ is calculated.
+
+Then, the number of conductors to be fit in a slot is determined by
+
+\begin{equation}
+	N_{cond} = \frac{A_sK_p}{A_{cond}}
+	\label{eq:numberOfConductorsPerSlot}
+\end{equation}
+
+Hence, the number of conductors to be fit in one slot is $N_{cond}=999$. 
+
+
+\subsection{d. Electrical Loading}
+
+
+Now that the number of conductors per slot is determined, the electric loading of the machine can be calculated.
+
+\begin{equation}
+	\hat{A} = \frac{N_sN_{cond}I}{2\pi r_{si}}\frac{1}{\sqrt{2}}
+	\label{eq:specificElectricLoading}
+\end{equation}
+
+\subsection{e. Average Tangential Stress \& Total Force}
+
+\begin{equation}
+	l'=l+2l_g
+	\label{eq:effectiveAxialLength}
+\end{equation}
+
+
+\begin{eqnarray}
+	\sigma_{tan} = \frac{\bar{A}\hat{B}}{\sqrt{2}} \\
+	F = 2\sigma_{tan}\pi r_{r}l' \\
+	T = Fr_{r}= 2\sigma_{tan}\pi r^2_{r}l'
+	\label{eq:specificElectricLoading}
+\end{eqnarray}
+
+\subsection{f. Expected Power Output}
+
+\begin{equation}
+	P=T\times\omega
+\end{equation}
 
 
 \section{Q3- Comparison \& Optimization}

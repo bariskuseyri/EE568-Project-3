@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Introduction}{2}%
+\contentsline {section}{\numberline {2}Q1- Magnetic Loading}{2}%
+\contentsline {subsection}{\numberline {2.1}a. Magnetic Equivalent Circuit, Magnet Load Line and Peak Air-gap Flux Density}{2}%
+\contentsline {subsection}{\numberline {2.2}b. Magnetic Loading}{2}%
+\contentsline {subsection}{\numberline {2.3}c. FEA Results}{4}%
+\contentsline {section}{\numberline {3}Q2- Electrical Loading \& Machine Sizing}{4}%
+\contentsline {subsection}{\numberline {3.1}a. Number of Slots}{4}%
+\contentsline {subsection}{\numberline {3.2}b. AWG Cable}{4}%
+\contentsline {subsection}{\numberline {3.3}c. Slot Height, Number of Coils per Slot, and Back-core Thickness}{5}%
+\contentsline {subsection}{\numberline {3.4}d. Electrical Loading}{6}%
+\contentsline {subsection}{\numberline {3.5}e. Average Tangential Stress \& Total Force}{7}%
+\contentsline {subsection}{\numberline {3.6}f. Expected Power Output}{7}%
+\contentsline {section}{\numberline {4}Q3- Comparison \& Optimization}{7}%
+\contentsline {subsection}{\numberline {4.1}a}{7}%
+\contentsline {subsection}{\numberline {4.2}b}{7}%
+\contentsline {subsection}{\numberline {4.3}c}{7}%
