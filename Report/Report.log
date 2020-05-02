@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.11.24)  2 MAY 2020 01:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.11.24)  3 MAY 2020 00:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -532,49 +532,66 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout4 = `Report.toc'.
 
  [1]
+
+LaTeX Warning: Reference `hanselman' on page 2 undefined on input line 29.
+
+
+Overfull \hbox (3.4665pt too wide) in paragraph at lines 29--30
+[]\OT1/cmr/m/n/10.95 Surface-mount per-ma-nent mag-net (SPM) topol-ogy is kind 
+of a ma-chine where PMs mounted
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2]
 \realshift=\dimen186
 \realshift=\dimen187
 \realshift=\dimen188
 \realshift=\dimen189
 \realshift=\dimen190
 \realshift=\dimen191
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[2] [3]
-<fluxDensity.png, id=28, 314.07338pt x 167.4255pt>
+ [3] [4]
+<fluxDensity.png, id=31, 314.07338pt x 167.4255pt>
 File: fluxDensity.png Graphic file (type png)
 <use fluxDensity.png>
-Package pdftex.def Info: fluxDensity.png  used on input line 177.
+Package pdftex.def Info: fluxDensity.png  used on input line 224.
 (pdftex.def)             Requested size: 445.35826pt x 237.41629pt.
-<airgapFluxDensity.png, id=29, 853.08713pt x 283.96088pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<airgapFluxDensity.png, id=32, 853.08713pt x 283.96088pt>
 File: airgapFluxDensity.png Graphic file (type png)
 <use airgapFluxDensity.png>
-Package pdftex.def Info: airgapFluxDensity.png  used on input line 183.
+Package pdftex.def Info: airgapFluxDensity.png  used on input line 230.
 (pdftex.def)             Requested size: 445.35826pt x 148.24544pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[5] [6 <./fluxDensity.png>] [7 <./airgapFluxDensity.png>] [8] (./Report.bbl
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-[4] [5 <./fluxDensity.png>] [6 <./airgapFluxDensity.png>] [7]
-No file Report.bbl.
-(./Report.aux)
+) [9] (./Report.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24055 strings out of 492164
- 597061 string characters out of 6129087
- 754440 words of memory out of 5000000
- 28127 multiletter control sequences out of 15000+600000
+ 24242 strings out of 492164
+ 601572 string characters out of 6129087
+ 768026 words of memory out of 5000000
+ 28312 multiletter control sequences out of 15000+600000
  8811 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,9n,71p,452b,939s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,9n,71p,626b,931s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2019
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2019/texmf-di
@@ -585,10 +602,10 @@ c/amsfonts/cm/cmr10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts
 pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/tex
 live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2019
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Report.pdf (8 pages, 220007 bytes).
+Output written on Report.pdf (10 pages, 225596 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

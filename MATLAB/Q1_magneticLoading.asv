@@ -42,7 +42,7 @@ figure(1)
 showaxes('show')
 fig1 = plot(Hm,Bm);
 hold on
-refline(0,0)
+
 fig2 = plot(Hm,LL);
 axis([-1100000 0 -0.1 1.5])
 xlabel('H (A/m)')

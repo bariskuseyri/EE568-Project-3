@@ -30,7 +30,6 @@ lm = 0.004;                         % magnet radial thickness [m]
 d = 0.545;                           % slot ratio
 % d = 0.61 for A = 80k - max A with air cooling
 % d = 0.85 for stator diameter = 160mm
-
 slotShape = 2;      % shape of slot
 % 0: rectangular slot trapezoidal tooth
 % 1: trapezoidal slot trapezoidal tooth

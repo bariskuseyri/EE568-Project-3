@@ -22,6 +22,22 @@
 \newpage
 
 \section{Introduction}
+\label{sec:intro}
+
+In this assignment you are going to design several surface-mount PM machines with the following constant parameters:
+
+Surface-mount permanent magnet (SPM) topology is kind of a machine where PMs mounted on the rotor surface, facing to the airgap [\ref{hanselman}].
+
+This project aims to prepare a study similar to what was done by W. L. Soong in his case study on Ferrite versus NdFeB. In his study, Soong replaces rare earth NdFeB magnets with ferrite magnets in an SPM machine. Later, he increases the thickness of the magnets and equalizes the flux density levels on stator tooth and back iron region of the machine with NdFeB magnets and ferrite magnets. Unlike Soong's study, this project sets the stator outer diameter constant.
+
+First, this project designs a SPM in part \ref{sec:Q1}, to analyse the magnetic loading of a machine. Then, in part \ref{sec:Q2}, it determines several machine parameters. The project continues by analysing electric loading of the machine, and the resulting average tangential stress, total force, torque and power output.
+
+
+This project aims to optimize a SPM machine, in which neodymium magnets. 
+
+This project 
+
+The starting values are given in Table \ref{table:machineParameters}, below.
 
 \begin{table}[ht]
 	\begin{center}
@@ -33,7 +49,6 @@
 			motor axial length & $l_m$ & mm & 100 \\ 
 			air-gap clearance & $\delta_g$ & mm & 1 \\
 			magnet to pole pitch ratio & & & 0.8 \\
-			rotor diameter & $D_r$ & mm & 100 \\
 			magnet radial thickness & $t_m$ & mm & 4 \\
 			\hline
 		\end{tabular}
@@ -45,10 +60,15 @@
 
 
 \section{Q1- Magnetic Loading}
+\label{sec:Q1}
+
+This project starts by analysing the magnetic loading of an SPM machine. The stator is assumed to be solid for this part. Additional to the parameters given in Table \ref{table:machineParameters}, some extra values are set as starting values. Parameters on rare earth magnet are given in Table \ref{fig:PMParameters} and rotor diameter is given in Table \ref{table:rotorParameter}.
 
 
 
-\begin{table}[ht]
+
+
+\begin{table}[h]
 	\begin{center}
 		\begin{tabular}{c|c|c|c}
 			 & symbol & units & value \\
@@ -65,29 +85,56 @@
 \end{table}
 
 
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			 & symbol & unit & value \\
+			\hline
+			rotor diameter & $D_r$ & mm & 100 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Rotor Dimensions}
+	\label{table:rotorParameter}
+\end{table}
 
 
 
 
 \subsection{a. Magnetic Equivalent Circuit, Magnet Load Line and Peak Air-gap Flux Density}
 
+Magnetic equivalent circuit for one pole-pair is shown in Fig. \ref{fig:magneticCircuit}. Here, each PM is modelled as an MMF source, meaning it's equivalent model is composed of a voltage source with a value of $F=\phi R_m$, and a resistance $R_m$ connected in series.
 
-\begin{figure}[h!]
+Starting with PM \#1, the flux $\phi$ goes through the airgap, modelled as $R_g$, and splits into two components at the stator back iron. Each half of the flux goes through the back iron, in opposite directions. Here, only one pole-pair is shown, so only one half-of-the-flux is described further. This half flux component then merges with, again what is another half flux component, and travels through the airgap, modelled again as $R_g$. Then, it travels through PM \#2, and splits into two. One of the components merges with another half flux components and goes through PM \#1. Hence, the cycle is completed.
+
+\begin{figure}[h]
 	\begin{center}
 		\begin{circuitikz}
 			\draw (0,0)
-			to[short] (0,0.5)
-			to[battery,l^=$F$, invert] (0,1)
-			to[R=$R_m$,i_=$\phi$] (0,3)
-			to[short] (0,4)
-			to[short,i_=$\frac{\phi}{2}$] (1,4)
-			to[R=$R_g$] (3,4)
-			to[short] (4,4)
-			to[short] (4,3.5)
-			to[battery,l^=$F$, invert] (4,3)
-			to[R=$R_m$,i_=$\phi$] (4,1)
-			to[short] (4,0)
-			to[R=$R_g$] (0,0);
+			to[short,i_=$\frac{\phi}{2}$,*-*] (0,2)
+			to[short,i_=$\phi$,*-*] (1,2)
+			to[battery,l^=$F$, invert,*-] (2,2)
+			to[R=$R_m$,i_=$\phi$,-*] (5,2)
+			to[R=$R_g$] (7,2)
+			to[short,i_=$\phi$] (8,2)
+			to[short,i_=$\frac{\phi}{2}$,*-*] (8,0)
+			to[short,i_=$\phi$] (7,0)
+			to[R=$R_g$] (5,0)
+			to[battery,l^=$F$, invert,*-] (4,0)
+			to[R=$R_m$,i_=$\phi$,-*] (1,0)
+			to[short,i_=$\phi$] (0,0);
+			\draw (0,4)
+			to[short,i_=$\frac{\phi}{2}$] (0,2);
+			\draw (8,2)
+			to[short,i_=$\frac{\phi}{2}$] (8,4);
+			\draw (8,-2)
+			to[short,i_=$\frac{\phi}{2}$] (8,0);
+			\draw (0,0)
+			to[short,i_=$\frac{\phi}{2}$] (0,-2);
+			\draw[black, thick] (1,1.5) rectangle (5,3.5)
+			node[pos=0.5, above=10pt]{PM \#1};
+			\draw[black, thick] (1,-1) rectangle (5,1)
+			node[pos=0.5, above=10pt]{PM \#2};
 		\end{circuitikz}
 	\caption{magnetic equivalent circuit for one pole-pair}
 	\label{fig:magneticCircuit}
@@ -173,13 +220,13 @@ which corresponds to specific magnetic loading $\bar{B}$ of the machine.
 
 FEMM is used as FEA software.
 
-\begin{figure}[t]
+\begin{figure}[h]
 	\includegraphics[width=\textwidth]{fluxDensity.png}
 	\caption{Flux Density Plot}
 	\label{fig:Bplot}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[h]
 	\includegraphics[width=\textwidth]{airgapFluxDensity.png}
 	\caption{Airgap Flux Density Distribution}
 	\label{fig:airgapBplot}
@@ -187,7 +234,7 @@ FEMM is used as FEA software.
 
 
 \section{Q2- Electrical Loading \& Machine Sizing}
-
+\label{sec:Q2}
 
 \subsection{a. Number of Slots}
 
@@ -309,11 +356,13 @@ Now that the number of conductors per slot is determined, the electric loading o
 
 
 
-\subsection{a}
+\subsection{a. Optimum Rotor Diameter}
 
-\subsection{b}
+\subsection{b. Replacing NdFeB with Ferrite}
 
-\subsection{c}
+\subsection{c. Optimizing Ferrite Machine}
+
+\section{Conclusion}
 
 
 
