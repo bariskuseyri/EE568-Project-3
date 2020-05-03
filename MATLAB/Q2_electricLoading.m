@@ -42,7 +42,7 @@ Kp = 0.6;       % maximum fill factor
 %% Analysis
 
 Rslot_inner = Rrotor_outer+lg;                  % slot inner radius [m]
-backiron = 1.5*((2*pi*Rslot_inner)/(2*Ns));     % back iron thickness [m]
+backiron = 2*((2*pi*Rslot_inner)/(2*Ns));     % back iron thickness [m]
 
 Rslot_outer = Rslot_inner * (1/d);      % slot outer radius [m]
 Rstator_outer = Rslot_outer + backiron; % stator outer radius [m]

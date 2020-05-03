@@ -100,8 +100,10 @@ P = T*w_rad;            % power outcome [W]
 
 [maxT, idx] = max(T);
 
-d(idx)
-T(idx)
+d(idx);
+[maxTT, idxx] = max(maxT);
+d(idxx)
+T(idxx);
 
 
 

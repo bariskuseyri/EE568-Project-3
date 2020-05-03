@@ -33,11 +33,13 @@ I = 2.5;        % coil current
 J_max = 5*1e6;      % maximum current density [A/m^2]
 Kp = 0.6;       % maximum fill factor
 
-Kt = linspace(0.01,0.99,450);       % slot/tooth ratio
+Kt1 = linspace(0.10,0.90,50);       % slot/tooth ratio
 
 %% Dimensions
 
-rro = linspace(0.010,0.055,450);        % rotor outer radius
+rro1 = linspace(0.010,0.055,150);        % rotor outer radius
+[Kt,rro] = meshgrid(Kt1,rro1);
+
 % rro = 0.025;
 rsi = rro + lg;                         % slot inner radius
 
@@ -95,11 +97,34 @@ P = T*w_rad;            % power outcome [W]
 % ylabel('Torque [Nm]')
 % grid on
 
-surf(d,Kt,T)
+
 [maxT, idx] = max(T);
-d(idx)
+
+max(M)
+d(idx);
 T(idx)
 
 
-% [X,Y] = meshgrid(1:0.5:10,1:20);
-% Z = sin(X) + cos(Y);
+
+surf(Kt,d,T);
+colormap(jet)
+xlabel('K_t:slot-to-tooth ratio')
+ylabel('slot ratio d=slot inner radius/slot outer radius')
+zlabel('Torque [Nm]')
+
+% tiledlayout(1,2)
+% 
+% % Left plot
+% ax1 = nexttile;
+% plot3(ax1,Kt,d,T)
+% xlabel('X')
+% ylabel('Y')
+% zlabel('Z')
+% 
+% % Right plot
+% ax2 = nexttile;
+% plot3(ax2,Kt,d,T)
+% xlabel('X')
+% ylabel('Y')
+% zlabel('Z')
+% view(ax2,[90 0]);
