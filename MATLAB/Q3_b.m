@@ -72,8 +72,8 @@ A = (1/sqrt(2)).*A_peak;            % specific electric loading
 %% Magnetic Loading B
 u_0 = 4 * pi * 1e-7;    % permeability of vacuum
 u_r = 1.05;             % relative permeability of magnets
-H_c = -994529;           % coercivity [A/m]
-B_rem = -H_c * u_0 * u_r;     % remanence flux density [T]
+B_rem = 0.4;     % remanence flux density [T]
+H_c = -B_rem/(u_0*u_r);           % coercivity [A/m]
 
 Bg_peak_analytic = B_rem / (1 + u_r * (lg / lm));
 B = (1/sqrt(2)) * Bg_peak_analytic;

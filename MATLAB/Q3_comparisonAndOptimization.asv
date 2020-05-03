@@ -11,8 +11,6 @@ close all
 
 %% Machine Parameters
 
-Bg_peak = 1.039406019862528;
-
 m = 3;      % number of phase
 Ns = 12;    % number of slots
 pp = 2;     % number of pole-pairs
@@ -22,8 +20,8 @@ l_m = 0.100;        % axial length [m]
 lg = 0.001;         % airgap clearance [m]
 l_e = l_m + 2*lg;   % axial effective length [m]
 
-Dstator_outer = 0.160;               % stator outer diameter [m]
-Rstator_outer = Dstator_outer/2;      % stator outer radius [m]
+do = 0.160;               % stator outer diameter [m]
+ro = do/2;      % stator outer radius [m]
 lm = 0.004;                             % magnet radial thickness [m]
 
 slotShape = 2;      % shape of slot
@@ -35,72 +33,79 @@ I = 2.5;        % coil current
 J_max = 5*1e6;      % maximum current density [A/m^2]
 Kp = 0.6;       % maximum fill factor
 
-%% Opt
+Kt = 0.5;       % slot/tooth ratio
 
-% Rslot_outer = Rstator_outer - backiron;     % slot outer radius
-% Rslot_inner = Rslot_outer * d;              % slot inner radius
-% Rrotor_outer = Rslot_inner + lg;            % rotor outer radius
-% taoTeeth = 2 * pi * Rrotor_outer * (1/(2*Ns));  % teeth thickness
-% hslot = Rslot_outer - Rslot_inner;            % slot height
-% Atooth = taoTeeth * hslot;
-% Aslot = (pi * (Rslot_outer^2 - Rslot_inner^2) - Atooth * Ns) / Ns;
+%% Dimensions
 
+rro = linspace(0.010,0.055,450);        % rotor outer radius
+% rro = 0.025;
+rsi = rro + lg;                         % slot inner radius
 
-Rrotor_outer = linspace(0.010,0.055,600);
-% Rrotor_outer = 0.030;
-Rslot_inner = Rrotor_outer + lg;            % slot inner radius
-taoTeeth = 2 * pi * Rslot_inner / (2*Ns);       % teeth thickness
-backiron = taoTeeth * 1.5;                  % backiron
-hslot = Rstator_outer - (backiron + Rslot_inner);   % slot height
-Rslot_outer = (-1)*(backiron - Rstator_outer);     % slot outer radius
-d = Rslot_inner ./ Rslot_outer;              % slot ratio
-
-Atooth = taoTeeth .* hslot;
-Aslot = (pi * (Rslot_outer.^2 - Rslot_inner.^2) - Atooth * Ns) / Ns;
-
-A=(Aslot./Rslot_inner)*(1/sqrt(2))*(Ns*Kp*J_max)/(2*pi);  % specific electric loading
+taoTeeth = Kt * 2 * pi * rsi / Ns;      % teeth thickness
+taoSlot = (1-Kt) * 2 * pi * rsi / Ns;   % slot opening
+backiron = taoTeeth * 1;                % backiron
+hslot = ro - (backiron + rsi);          % slot height
+rso = rsi + hslot;                      % slot outer radius
+d = rsi ./ rso;                         % slot ratio
 
 
+if slotShape == 0
+    Aslot=hslot.*(2*pi.*rsi)/(2*Ns);            % slot area [m^2]
+elseif slotShape == 1
+    Aslot = hslot.*(((rso+rsi)*pi)/(Ns*2));     % slot area [m^2]
+elseif slotShape == 2
+    Atooth=hslot.*(2*pi.*rsi)/(2*Ns);               % tooth area [m^2]
+    Aslot=(((rso.^2-rsi.^2).*pi)-Ns.*Atooth)./Ns;   % slot area [m^2]
+else
+end
+
+%% Electrical Loading A
+
+A_cond = 0.518e-6;              % conductor area
+Ncond = Kp*Aslot/A_cond;        % number of conductors
+
+A_peak=((Ns*Kp*J_max)/(2*pi)).*(Aslot./rsi);
+% A_peak=((Ns*I)/(2*pi)).*Ncond.*(Aslot./rsi);
+A = (1/sqrt(2)).*A_peak;            % specific electric loading
+
+
+%% Magnetic Loading B
 u_0 = 4 * pi * 1e-7;    % permeability of vacuum
 u_r = 1.05;             % relative permeability of magnets
 H_c = 994529;           % coercivity [A/m]
-B_rem = H_c * u_0 * u_r;     % remanence flux density
+B_rem = H_c * u_0 * u_r;     % remanence flux density [T]
 
 Bg_peak_analytic = B_rem / (1 + u_r * (lg / lm));
 B = (1/sqrt(2)) * Bg_peak_analytic;
 
 %% Average tangential stress in the rotor surface
 
-sigma_tan = (A*Bg_peak)/sqrt(2);        % tangential stress [N/m^2]
-F = sigma_tan.*2*pi.*Rrotor_outer*l_e;    % total force [N]
+sigma_tan = A*B;        % tangential stress [N/m^2]
+F = sigma_tan.*2*pi.*rro*l_e;    % total force [N]
 
 %% Power outcome
 
-T = 2*sigma_tan.*((Rrotor_outer.^2)*pi*l_e);      % rated torque [Nm]
+T = 2*sigma_tan.*((rro.^2)*pi*l_e);      % rated torque [Nm]
 w = 1500;               % rotor speed [rpm]
 w_rad = w*(2*pi/60);    % rotor speed [rad/s]
 P = T*w_rad;            % power outcome [W]
 
-
-
-asd = linspace(0.3,0.9,1000);
-asdf = (1-asd.^2)./asd;
 plot(d,T)
+[maxT, idx] = max(T);
+d(idx)
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+%%
+% RRO = linspace(0.010,0.070,600);
+% AAAA = (pi.*((0.080-(pi/12).*(RRO+0.001)).^2))-(pi.*(RRO+0.001).^2)-(0.080-(pi/12).*(RRO+0.001)-RRO-0.001).*(pi/12).*(RRO+0.001).*12;
+% AAAA_peak=(AAAA./(RRO+0.001))*(Ns*Kp*J_max)/(2*pi);
+% sigmaaaa = (1/2).*AAAA_peak.*Bg_peak_analytic;
+% TTTT = sigmaaaa .* pi .* ((2.*RRO).^2) .* l_e ./2;
+% 
+% 
+% plot(RRO,TTTT)
+% [maxT, idxxx] = max(TTTT);
+% RRO(idxxx)

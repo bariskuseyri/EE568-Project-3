@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.11.24)  3 MAY 2020 19:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.11.24)  3 MAY 2020 21:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Report.tex
-(./Report.tex
+**untitled-1.tex
+(./untitled-1.tex
 LaTeX2e <2019-10-01> patch level 3
 (c:/texlive/2019/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/10/25 v1.4k Standard LaTeX document class
@@ -424,12 +424,14 @@ Package circuitikz Warning: You did not specify one of the voltage directions:
 (circuitikz)                Default directions may have changed, 
 (circuitikz)                please check the manual.
 
-) (./Report.aux
+) (./untitled-1.aux
 
 LaTeX Warning: Label `eq:specificMagneticLoading' multiply defined.
 
 
 LaTeX Warning: Label `fig:PMParameters' multiply defined.
 
-
-LaTeX Warning: Label `eq:specificElectricLo
+)
+Runaway argument?
+{{18} 
+! Fil

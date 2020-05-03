@@ -68,20 +68,26 @@ fig3 = plot(x_FEMM_indegrees,Bg_FEMM);
 fig3.LineStyle = '-';
 fig3.LineWidth = 1.5;
 fig3.Color = 'k';
-title('Radial Air-gap Flux Density')
+% title('Radial Air-gap Flux Density')
 xlabel('\theta (degrees)')
 ylabel('B_g (T)')
 ax = gca;
 ax.XGrid = 'off';
 ax.YGrid = 'on';
 yticks(0:0.1:1.5)
-set(gcf,'units','centimeters','position',[2,5,30,10])
+set(gcf,'units','centimeters','position',[0,2,30,15])
 
 %% Magnetic Loading
 
-Bg_avg = sum(Bg_FEMM,2)./size(Bg_FEMM,2);
+Bg_avg_FEMM = sum(Bg_FEMM,2)./size(Bg_FEMM,2);
 
 B1 = (2/pi) * Bg_peak_analytic;
 B2 = (1/sqrt(2)) * Bg_peak_analytic;
+
+%% Error Calculation
+
+Err1 = abs((Bg_peak_FEMM-Bg_peak_analytic)/Bg_peak_FEMM)*100;
+Err2 = abs((Bg_avg_FEMM-B2)/Bg_avg_FEMM)*100;
+
 
 
